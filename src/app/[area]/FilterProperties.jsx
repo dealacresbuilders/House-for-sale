@@ -78,11 +78,11 @@ export default function FilterProperties({ area }) {
         {/* HEADING */}
         <div className="text-center mb-14">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Premium Shops in{" "}
+            Premium House For Sale in{" "}
             <span className="text-[#FF6500]">{formattedArea}</span>
           </h1>
           <p className="text-gray-600 mt-3">
-            Verified commercial properties in prime business locations.
+            Residential properties in prime business locations.
           </p>
           <div className="w-20 h-1 bg-[#FF6500] mx-auto mt-6 rounded-full"></div>
         </div>
@@ -99,20 +99,20 @@ export default function FilterProperties({ area }) {
             >
 
               {/* IMAGE */}
-              <div className="relative md:w-2/5 aspect-[4/3] md:aspect-auto">
-                {property?.media?.url ? (
-                  <Image
-                    src={property.media.url}
-                    alt={property.title}
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="bg-orange-50 w-full h-full flex items-center justify-center text-[#FF6500] text-sm">
-                    No Image
-                  </div>
-                )}
-              </div>
+             <div className="relative md:w-1/3 aspect-[4/3] md:aspect-auto">
+  {property?.media?.url ? (
+    <Image
+      src={property.media.url}
+      alt={property.title}
+      fill
+      className="object-cover"
+    />
+  ) : (
+    <div className="bg-orange-50 w-full h-full flex items-center justify-center text-[#FF6500] text-sm">
+      No Image
+    </div>
+  )}
+</div>
 
               {/* CONTENT */}
               <div className="p-6 flex-1 flex flex-col">
@@ -149,7 +149,7 @@ export default function FilterProperties({ area }) {
                   <div className="flex flex-col items-center flex-1">
                     <span className="text-gray-500">TYPE</span>
                     <span className="font-semibold text-gray-900">
-                      {property.type || "Commercial"}
+                      {property.propertyCategory}
                     </span>
                   </div>
 
@@ -163,32 +163,45 @@ export default function FilterProperties({ area }) {
                 <div className="flex-1" />
 
                 {/* PRICE + LINK */}
-                <div className="mt-5 flex justify-between items-center">
+                {/* PRICE + ACTIONS */}
+<div className="mt-5 flex justify-between items-center flex-wrap gap-3">
 
-                  {property.price && property.price > 0 ? (
-                    <p className="text-lg font-bold text-[#FF6500]">
-                      ₹ {property.price.toLocaleString("en-IN")}
-                    </p>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        setSelectedProperty(property.title);
-                        setOpen(true);
-                      }}
-                      className="bg-[#FF6500] text-white px-4 py-1.5 rounded-full text-xs hover:bg-[#e65a00] transition"
-                    >
-                      Price on Call
-                    </button>
-                  )}
+  {/* PRICE */}
+  {property.price && property.price > 0 ? (
+    <p className="text-lg font-bold text-[#FF6500]">
+      ₹ {property.price.toLocaleString("en-IN")}
+    </p>
+  ) : (
+    <span className="text-sm font-semibold text-[#FF6500]">
+      Price on Request
+    </span>
+  )}
 
-                  <Link
-                    href={`/properties/${property.slug}`}
-                    className="text-[#FF6500] text-sm font-medium hover:underline"
-                  >
-                    View Details →
-                  </Link>
+  {/* RIGHT SIDE BUTTONS */}
+  <div className="flex items-center gap-4">
 
-                </div>
+    {/* ENQUIRE NOW */}
+    <button
+      onClick={() => {
+        setSelectedProperty(property.title);
+        setOpen(true);
+      }}
+      className="bg-[#FF6500] text-white px-4 py-2 rounded-full text-sm
+      hover:bg-[#e65a00] transition shadow-md cursor-pointer"
+    >
+      Contact Now
+    </button>
+
+    {/* VIEW DETAILS (UNCHANGED STYLE) */}
+    <Link
+      href={`/properties/${property.slug}`}
+      className="text-[#FF6500] text-sm font-medium hover:underline cursor-pointer"
+    >
+      View Details →
+    </Link>
+
+  </div>
+</div>
 
               </div>
             </div>

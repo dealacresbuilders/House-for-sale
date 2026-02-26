@@ -76,11 +76,11 @@ export default function Properties() {
       {/* PAGE HEADING */}
       <div className="max-w-7xl mx-auto text-center mb-12">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Premium Commercial Properties in Faridabad
+          Premium Residential House For Sale Properties in Faridabad
         </h1>
 
         <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
-          Explore high-potential shops and commercial spaces available for rent
+          Explore high-potential houses and Residential spaces available for sale
           and investment across prime locations in Faridabad.
         </p>
 
@@ -177,7 +177,7 @@ export default function Properties() {
                         }}
                         className="bg-[#FF6500] text-white px-6 py-2 rounded-full hover:bg-[#e65a00] transition w-full md:w-auto text-center font-medium shadow-sm hover:shadow-md"
                       >
-                        Enquire Now
+                        Contact Now
                       </button>
 
                       <Link
