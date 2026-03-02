@@ -71,7 +71,7 @@ export default function Page() {
 
         {/* ================= HEADING ================= */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
             Let’s Discuss Your{" "}
             <span className="text-[#FF6500]">
               Property Goals

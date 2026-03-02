@@ -1,16 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useProperty } from "@/contextapi/propertycontext";
 import Image from "next/image";
 import Link from "next/link";
-import { useProperty } from "@/contextapi/propertycontext";
 import ContactPopup from "@/components/ContactPopup";
 
 export default function FilterProperties({ area }) {
+
+  const { data, properties, loading2, error2, setLocality } = useProperty();
+
+  // ✅ SAFETY FIX (null crash prevent)
+  const safeData = Array.isArray(data) ? data : [];
+  const safeProperties = Array.isArray(properties) ? properties : [];
+
   const [open, setOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState("");
-
-  const { data, loading2, error2, setLocality } = useProperty();
 
   const formattedArea = area
     ?.replace(/-/g, " ")
@@ -20,16 +25,42 @@ export default function FilterProperties({ area }) {
     if (formattedArea) {
       setLocality(formattedArea);
     }
-  }, [formattedArea]);
+  }, [formattedArea, setLocality]);
 
   const formatArea = (area, unit) => {
     if (!area) return "N/A";
     const formattedNumber = Number(area).toLocaleString("en-IN");
     if (!unit) return formattedNumber;
-    const formattedUnit =
-      unit.charAt(0).toUpperCase() + unit.slice(1).toLowerCase();
-    return `${formattedNumber} ${formattedUnit}`;
+    return `${formattedNumber} ${unit}`;
   };
+
+  /* ================= 150 CARD LOGIC ================= */
+
+  const finalData = useMemo(() => {
+
+    // Agar full domain data hi nahi hai
+    if (safeProperties.length === 0) {
+      return safeData;
+    }
+
+    // Filtered IDs
+    const filteredIds = new Set(
+      safeData.map((p) => p._id)
+    );
+
+    // Remaining domain properties
+    const remaining = safeProperties.filter(
+      (p) => !filteredIds.has(p._id)
+    );
+
+    const needed = 150 - safeData.length;
+
+    return [
+      ...safeData,
+      ...remaining.slice(0, needed > 0 ? needed : 0)
+    ].slice(0, 150);
+
+  }, [safeData, safeProperties]);
 
   /* ================= LOADING ================= */
   if (loading2) {
@@ -72,11 +103,11 @@ export default function FilterProperties({ area }) {
   }
 
   return (
-    <section className="bg-[#F5F7FA] px-4 py-12">
+    <section className="bg-[#F5F7FA] px-4 py-10">
       <div className="max-w-7xl mx-auto">
 
         {/* HEADING */}
-        <div className="text-center mb-14">
+        {/* <div className="text-center mb-14">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
             Premium House For Sale in{" "}
             <span className="text-[#FF6500]">{formattedArea}</span>
@@ -85,12 +116,12 @@ export default function FilterProperties({ area }) {
             Residential properties in prime business locations.
           </p>
           <div className="w-20 h-1 bg-[#FF6500] mx-auto mt-6 rounded-full"></div>
-        </div>
+        </div> */}
 
         {/* GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1  gap-6">
 
-          {data.map((property) => (
+          {finalData.map((property) => (
             <div
               key={property._id}
               className="bg-white rounded-2xl border border-orange-100
@@ -99,20 +130,20 @@ export default function FilterProperties({ area }) {
             >
 
               {/* IMAGE */}
-             <div className="relative md:w-1/3 aspect-[4/3] md:aspect-auto">
-  {property?.media?.url ? (
-    <Image
-      src={property.media.url}
-      alt={property.title}
-      fill
-      className="object-cover"
-    />
-  ) : (
-    <div className="bg-orange-50 w-full h-full flex items-center justify-center text-[#FF6500] text-sm">
-      No Image
-    </div>
-  )}
-</div>
+              <div className="relative md:w-1/3 aspect-[4/3] md:aspect-auto">
+                {property?.media?.url ? (
+                  <Image
+                    src={property.media.url}
+                    alt={property.title}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="bg-orange-50 w-full h-full flex items-center justify-center text-[#FF6500] text-sm">
+                    No Image
+                  </div>
+                )}
+              </div>
 
               {/* CONTENT */}
               <div className="p-6 flex-1 flex flex-col">
@@ -164,44 +195,44 @@ export default function FilterProperties({ area }) {
 
                 {/* PRICE + LINK */}
                 {/* PRICE + ACTIONS */}
-<div className="mt-5 flex justify-between items-center flex-wrap gap-3">
+                <div className="mt-5 flex justify-between items-center flex-wrap gap-3">
 
-  {/* PRICE */}
-  {property.price && property.price > 0 ? (
-    <p className="text-lg font-bold text-[#FF6500]">
-      ₹ {property.price.toLocaleString("en-IN")}
-    </p>
-  ) : (
-    <span className="text-sm font-semibold text-[#FF6500]">
-      Price on Request
-    </span>
-  )}
+                  {/* PRICE */}
+                  {property.price && property.price > 0 ? (
+                    <p className="text-lg font-bold text-[#FF6500]">
+                      ₹ {property.price.toLocaleString("en-IN")}
+                    </p>
+                  ) : (
+                    <span className="text-sm font-semibold text-[#FF6500]">
+                      Price on Request
+                    </span>
+                  )}
 
-  {/* RIGHT SIDE BUTTONS */}
-  <div className="flex items-center gap-4">
+                  {/* RIGHT SIDE BUTTONS */}
+                  <div className="flex items-center gap-4">
 
-    {/* ENQUIRE NOW */}
-    <button
-      onClick={() => {
-        setSelectedProperty(property.title);
-        setOpen(true);
-      }}
-      className="bg-[#FF6500] text-white px-4 py-2 rounded-full text-sm
+                    {/* ENQUIRE NOW */}
+                    <button
+                      onClick={() => {
+                        setSelectedProperty(property.title);
+                        setOpen(true);
+                      }}
+                      className="bg-[#FF6500] text-white px-4 py-2 rounded-full text-sm
       hover:bg-[#e65a00] transition shadow-md cursor-pointer"
-    >
-      Contact Now
-    </button>
+                    >
+                      Contact Now
+                    </button>
 
-    {/* VIEW DETAILS (UNCHANGED STYLE) */}
-    <Link
-      href={`/properties/${property.slug}`}
-      className="text-[#FF6500] text-sm font-medium hover:underline cursor-pointer"
-    >
-      View Details →
-    </Link>
+                    {/* VIEW DETAILS (UNCHANGED STYLE) */}
+                    <Link
+                      href={`/properties/${property.slug}`}
+                      className="text-[#FF6500] text-sm font-medium hover:underline cursor-pointer"
+                    >
+                      View Details →
+                    </Link>
 
-  </div>
-</div>
+                  </div>
+                </div>
 
               </div>
             </div>

@@ -27,7 +27,7 @@ export default function PropertyDetails({ propertyy }) {
               p._id !== propertyy._id &&
               p.city?.toLowerCase() === propertyy.city?.toLowerCase()
           )
-          .slice(0, 6)
+          .slice(0, 30)
       : [];
 
   return (
@@ -96,7 +96,7 @@ export default function PropertyDetails({ propertyy }) {
                 onClick={() => setOpen(true)}
                 className="bg-[#F97316] hover:bg-[#EA580C] text-white px-8 py-3 rounded-full text-sm font-medium shadow-md transition"
               >
-                Contact Seller
+                Contact For Buy
               </button>
             </div>
 

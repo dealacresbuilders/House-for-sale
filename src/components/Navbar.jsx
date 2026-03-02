@@ -21,7 +21,16 @@ const Navbar = () => {
 
             {/* LOGO */}
             <Link
-              href="/"
+               href="/"
+  onClick={(e) => {
+    if (window.location.pathname === "/") {
+      e.preventDefault(); // route reload prevent
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }}
               className="text-xl sm:text-2xl font-bold tracking-wide text-[#FF6500] hover:text-[#e65a00] transition"
             >
               House for Sale in Faridabad

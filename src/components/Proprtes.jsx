@@ -1,15 +1,23 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState,useEffect, useRef } from "react";
+
 import { useProperty } from "@/contextapi/propertycontext";
 import Image from "next/image";
 import Link from "next/link";
 import ContactPopup from "@/components/ContactPopup";
 import SidebarEnquiryForm from "./SidebarEnquiryForm";
 import Pagination from "@/components/Pagination";
+import BHKFilterButtons from "@/components/BHKFilterButtons";
+import { useSearchParams } from "next/navigation";
 
 export default function Properties() {
-  const { properties, loading, error } = useProperty();
+  const {
+  properties,
+  loading,
+  error,
+  
+} = useProperty();
   const [open, setOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,6 +26,17 @@ export default function Properties() {
 
   const itemsPerPage = 150;
 
+
+// useEffect(() => {
+//   setCurrentPage(1);
+
+//   if (bhk) {
+//     console.log("BHK Triggered:", bhk);  // 👈 ye add karo
+//     fetchPropertiesByType(bhk);
+//   } else {
+//     refetch();
+//   }
+// }, [bhk]);
   const formatArea = (area, unit) => {
     if (!area) return "N/A";
     const formattedNumber = Number(area).toLocaleString("en-IN");
@@ -53,7 +72,7 @@ export default function Properties() {
     return (
       <div className="text-center py-20">
         <h2 className="text-2xl font-semibold text-gray-800">
-          No Shops Available in Faridabad
+          No houses Available in Faridabad
         </h2>
         <p className="text-gray-500 mt-2">
           New listings will be updated soon.
@@ -73,20 +92,24 @@ export default function Properties() {
       ref={propertySectionRef}
       className="bg-[#F5F7FA] px-4 py-16"
     >
-      {/* PAGE HEADING */}
-      <div className="max-w-7xl mx-auto text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Premium Residential House For Sale Properties in Faridabad
-        </h1>
+     {/* PAGE HEADING */}
+<div className="max-w-7xl mx-auto mb-12">
+  <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+    Premium Residential House For Sale Properties in Faridabad
+  </h1>
 
-        <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
-          Explore high-potential houses and Residential spaces available for sale
-          and investment across prime locations in Faridabad.
-        </p>
+  <p className="mt-4 text-gray-500 max-w-2xl">
+    Explore high-potential houses and Residential spaces available for sale
+    and investment across prime locations in Faridabad.
+  </p>
 
-        <div className="w-20 h-1 bg-[#FF6500] mx-auto mt-6 rounded-full"></div>
-      </div>
+  <div className="w-20 h-1 bg-[#FF6500] mt-6 rounded-full"></div>
 
+  {/* ✅ BHK FILTER BUTTONS */}
+  <div className="mt-8">
+    <BHKFilterButtons />
+  </div>
+</div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
 
         {/* LEFT SIDE */}
