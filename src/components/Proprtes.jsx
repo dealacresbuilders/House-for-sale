@@ -119,7 +119,7 @@ export default function Properties() {
               key={property._id}
               className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden"
             >
-              <div className="flex flex-col md:flex-row">
+             <div className="flex flex-col md:flex-row ">
 
                 <div className="relative md:w-[35%]">
                   <Image
@@ -191,26 +191,30 @@ export default function Properties() {
                       ₹ {property.price?.toLocaleString("en-IN")}
                     </p>
 
-                    <div className="flex gap-3 w-full md:w-auto">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
 
-                      <button
-                        onClick={() => {
-                          setSelectedProperty(property.title);
-                          setOpen(true);
-                        }}
-                        className="bg-[#FF6500] text-white px-6 py-2 rounded-full hover:bg-[#e65a00] transition w-full md:w-auto text-center font-medium shadow-sm hover:shadow-md"
-                      >
-                        Contact Now
-                      </button>
+  <button
+    onClick={() => {
+      setSelectedProperty(property.title);
+      setOpen(true);
+    }}
+    className="bg-[#FF6500] text-white px-4 sm:px-6 py-2 rounded-full 
+    hover:bg-[#e65a00] transition w-full md:w-auto 
+    text-center font-medium shadow-sm hover:shadow-md text-sm"
+  >
+    Contact Now
+  </button>
 
-                      <Link
-                        href={`/properties/${property.slug}`}
-                        className="border border-[#FF6500] text-[#FF6500] px-6 py-2 rounded-full hover:bg-orange-50 transition w-full md:w-auto text-center font-medium"
-                      >
-                        View Details
-                      </Link>
+  <Link
+    href={`/properties/${property.slug}`}
+    className="border border-[#FF6500] text-[#FF6500] 
+    px-4 sm:px-6 py-2 rounded-full hover:bg-orange-50 
+    transition w-full md:w-auto text-center font-medium text-sm"
+  >
+    View Details
+  </Link>
 
-                    </div>
+</div>
                   </div>
 
                 </div>
