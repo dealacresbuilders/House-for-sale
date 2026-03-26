@@ -76,10 +76,10 @@ export default function PropertyCard({ property }) {
             </div>
           </div>
 
-          <p className="text-xs text-gray-500 mt-3 line-clamp-2 leading-relaxed">
+          {/* <p className="text-xs text-gray-500 mt-3 line-clamp-2 leading-relaxed">
             {property.description2 ||
               "High-value commercial asset offering strong rental potential and long-term growth."}
-          </p>
+          </p> */}
 
           <div className="flex-1" />
 
