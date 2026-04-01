@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-
+import Link from "next/link";
 const HeroSection = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -89,6 +89,15 @@ const HeroSection = () => {
       From independent houses and builder floors to spacious family homes, we bring you trusted options.<br/><br/>
       With expert guidance, transparent pricing, and genuine listings, finding a house for sale in Faridabad has never been easier.
           </p>
+          <Link href="/house-for-sale">
+  <button className="relative overflow-hidden bg-[#FF6500] text-white px-6 py-3 rounded-xl font-semibold shadow-md transition-all duration-300 hover:bg-[#FF6500] hover:shadow-xl hover:scale-105 mt-4">
+    
+    <span className="relative z-10">Learn More</span>
+
+    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] hover:translate-x-[100%] transition duration-700"></span>
+  
+  </button>
+</Link>
         </div>
 
         {/* RIGHT GLASS FORM */}

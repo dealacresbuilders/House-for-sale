@@ -90,6 +90,7 @@ export default function Properties() {
   return (
     <section
       ref={propertySectionRef}
+      id="locations"
       className="bg-[#F5F7FA] px-4 py-16"
     >
      {/* PAGE HEADING */}
