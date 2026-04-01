@@ -103,7 +103,7 @@ export default function FilterProperties({ area }) {
   }
 
   return (
-    <section className="bg-[#F5F7FA] px-4 py-10">
+    <section className="bg-[#F5F7FA] px-1 py-10">
       <div className="max-w-7xl mx-auto">
 
         {/* HEADING */}
@@ -130,7 +130,7 @@ export default function FilterProperties({ area }) {
             >
 
               {/* IMAGE */}
-              <div className="relative md:w-1/3 aspect-[4/3] md:aspect-auto">
+              <div className="relative md:w-[45%] aspect-[4/3] md:aspect-auto">
                 {property?.media?.url ? (
                   <Image
                     src={property.media.url}
@@ -146,15 +146,32 @@ export default function FilterProperties({ area }) {
               </div>
 
               {/* CONTENT */}
-              <div className="p-6 flex-1 flex flex-col">
+              <div className="p-6 flex flex-col w-full min-w-0">
+  
+  <h2 className="text-lg font-bold text-gray-900 overflow-hidden md:whitespace-nowrap md:text-ellipsis">
+    {property.title}
+  </h2>
 
-                <h2 className="text-base font-semibold text-gray-900 leading-snug">
-                  {property.title}
-                </h2>
+                  <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 21s-6-5.33-6-10a6 6 0 1112 0c0 4.67-6 10-6 10z"
+                      />
+                      <circle cx="12" cy="11" r="2.5" />
+                    </svg>
 
-                <p className="text-sm text-gray-600 mt-1">
-                  {property.locality}
-                </p>
+                    {property.locality}
+                  </p>
+
 
                 {/* INFO BAR */}
                 <div className="mt-4 bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 text-xs flex items-center justify-between">
@@ -186,10 +203,10 @@ export default function FilterProperties({ area }) {
 
                 </div>
 
-                <p className="text-sm text-gray-600 mt-3 line-clamp-2">
+                {/* <p className="text-sm text-gray-600 mt-3 line-clamp-2">
                   {property.description2 ||
                     "Prime commercial shop ideal for business and long-term investment."}
-                </p>
+                </p> */}
 
                 <div className="flex-1" />
 
