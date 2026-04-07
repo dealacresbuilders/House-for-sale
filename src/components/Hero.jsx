@@ -89,8 +89,8 @@ const HeroSection = () => {
       From independent houses and builder floors to spacious family homes, we bring you trusted options.<br/><br/>
       With expert guidance, transparent pricing, and genuine listings, finding a house for sale in Faridabad has never been easier.
           </p>
-          <Link href="/house-for-sale">
-  <button className="relative overflow-hidden bg-[#FF6500] text-white px-6 py-3 rounded-xl font-semibold shadow-md transition-all duration-300 hover:bg-[#FF6500] hover:shadow-xl hover:scale-105 mt-4">
+          <Link href="/how-it-works">
+  <button className="relative overflow-hidden bg-[#FF6500] text-white px-6 py-3 rounded-xl font-semibold shadow-md transition-all duration-300 hover:bg-[#FF6500] hover:shadow-xl hover:scale-105 mt-4 cursor-pointer">
     
     <span className="relative z-10">Learn More</span>
 
