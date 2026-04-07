@@ -7,6 +7,7 @@ import Link from "next/link";
 import ContactPopup from "@/components/ContactPopup";
 
 export default function FilterProperties({ area }) {
+  
 
   const { data, properties, loading2, error2, setLocality } = useProperty();
 

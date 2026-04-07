@@ -44,7 +44,7 @@ export default function Footer() {
               <div key={index} className="relative group overflow-visible">
 
                 <Link
-                  href={`/${createSlug(loc)}`}
+                  href={`/house-for-sale-in-${createSlug(loc)}`}
                   className="block truncate text-gray-400 hover:text-[#F97316] transition duration-200"
                 >
                   House For Sale {loc}
