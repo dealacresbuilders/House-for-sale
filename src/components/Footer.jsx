@@ -23,7 +23,7 @@ export default function Footer() {
     <footer className="bg-[#111827] pt-16 pb-8 px-4 border-t border-[#1F2937]">
       <div className="max-w-7xl mx-auto">
 
-        {/* <div className="mb-10">
+        <div className="mb-10">
           <h2 className="text-2xl font-bold text-white">
             House for Sale in{" "}
             <span className="text-[#F97316]">Faridabad</span>
@@ -31,20 +31,20 @@ export default function Footer() {
           <p className="text-gray-400 mt-4 max-w-2xl leading-relaxed">
             Discover premium residential properties across prime sectors of Faridabad.
           </p>
-        </div> */}
+        </div>
 
         <div className="mb-10">
           <h3 className="text-lg font-semibold text-white mb-6">
           House Available for Sale in Popular Locations 
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4 text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-6 gap-y-4 text-sm">
 
             {visibleLocations.map((loc, index) => (
               <div key={index} className="relative group overflow-visible">
 
                 <Link
-                  href={`/${createSlug(loc)}`}
+                  href={`/house-for-sale-in-${createSlug(loc)}`}
                   className="block truncate text-gray-400 hover:text-[#F97316] transition duration-200"
                 >
                   House For Sale {loc}
@@ -84,7 +84,44 @@ export default function Footer() {
             )}
 
           </div>
+          
         </div>
+        {/* 🔥 Bottom Navigation Buttons - CENTERED */}
+<div className="border-t border-[#1F2937] pt-6 mt-6 mb-6">
+  <div className="flex justify-center items-center">
+    
+    <div className="flex flex-wrap gap-6 justify-center text-sm">
+      <Link
+        href="/about"
+        className="text-gray-400 hover:text-[#F97316] transition"
+      >
+        About
+      </Link>
+
+      <Link
+        href="/blog"
+        className="text-gray-400 hover:text-[#F97316] transition"
+      >
+        Blog
+      </Link>
+
+      <Link
+        href="/contact"
+        className="text-gray-400 hover:text-[#F97316] transition"
+      >
+        Contact
+      </Link>
+
+      <Link
+        href="/how-it-works"
+        className="text-gray-400 hover:text-[#F97316] transition"
+      >
+        How It's Work
+      </Link>
+    </div>
+
+  </div>
+</div>
 
         <div className="border-t border-[#1F2937] pt-6 flex flex-col md:flex-row items-center justify-between">
           <p className="text-sm text-gray-500 text-center md:text-left">
