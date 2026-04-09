@@ -29,9 +29,9 @@ const formattedArea = area
             </span>
           </h1>
 
-          <p className="text-gray-600 mt-3">
+          <h2 className="text-gray-600 mt-3">
             Residential properties in prime business locations.
-          </p>
+          </h2>
 
           <div className="w-20 h-1 bg-[#FF6500] mt-6 rounded-full"></div>
         </div>

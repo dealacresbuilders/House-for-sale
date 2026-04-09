@@ -14,7 +14,7 @@ export const locations = [
   'Ashoka Enclave Part 3, Faridabad',
   'Ashoka Enclave, Faridabad',
   'Atmadpur Village, Faridabad',
-  'BPTP ELITE FLOOR BLOCK L Sector 84 Faridabad',
+  'BPTP ELITE FLOOR BLOCK L Sector 84, Faridabad',
   'BPTP, Faridabad',
   'Badarpur Said, Faridabad',
   'Badkhal, Faridabad',
