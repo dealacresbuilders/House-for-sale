@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { BlogProvider } from "@/contextapi/BlogContext";
 import { Toaster } from "react-hot-toast";
+import Script from "next/script";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -73,7 +74,7 @@ export default function RootLayout({ children }) {
 
         {/* ✅ Google Analytics (GA4) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-"
+          src="https://www.googletagmanager.com/gtag/js?id=G-XP5YLVK2EE"
           strategy="afterInteractive"
         />
         <Script id="ga-script" strategy="afterInteractive">
@@ -81,7 +82,7 @@ export default function RootLayout({ children }) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-');
+            gtag('config', 'G-XP5YLVK2EE');
           `}
         </Script>
       </head>
@@ -94,7 +95,7 @@ export default function RootLayout({ children }) {
 <noscript>
   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M79QZSB3"
 height="0" width="0" style="display:none;visibility:hidden">
-
+  
 </iframe>
 </noscript>
 
