@@ -12,7 +12,7 @@ const createSlug = (location) => {
 };
 
 export async function generateSitemap() {
-  const baseUrl = "www.houseforsaleinfaridabad.com";
+  const baseUrl = "https://www.houseforsaleinfaridabad.com";
 
   // 🔹 Static URLs
   const staticUrls = `
