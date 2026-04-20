@@ -6,7 +6,7 @@ export default function BHKFilterButtons() {
   const bhkOptions = ["1", "2", "3", "4"];
 
   const createSlug = (bhk) => {
-    return `${bhk}-bhk-house-for-sale-faridabad`;
+    return `${bhk}-bhk-houses-for-sale-faridabad`;
   };
 
   return (
