@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useBlog } from "@/contextapi/BlogContext";
 import Pagination from "@/components/Pagination";
-
+import Breadcrumb from "@/components/Breadcrumb";
 // Date formatter
 const formatDate = (date) => {
   if (!date) return "";
@@ -37,20 +37,23 @@ export default function BlogList() {
       id="blog-section"
       className="px-4 sm:px-6 lg:px-0 max-w-7xl mx-auto py-16 bg-gradient-to-b from-white to-orange-50"
     >
+      <div className="mb-6">
+   <Breadcrumb />
+  </div>
 
       {/* ===== HEADING ===== */}
-      <div className="text-center mb-14">
+      <div className=" mb-14">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
           Latest Insights &{" "}
           <span className="text-[#FF6500]">Real Estate Updates</span>
         </h2>
 
-        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+        <p className="text-gray-600 mt-4 max-w-2xl">
           Stay updated with expert strategies, SEO tips, and digital marketing
           insights to grow your real estate business faster.
         </p>
 
-        <div className="w-20 h-1 bg-[#FF6500] mx-auto mt-6 rounded-full"></div>
+        <div className="w-20 h-1 bg-[#FF6500] mt-6 rounded-full"></div>
       </div>
 
       {/* ===== LOADING */}

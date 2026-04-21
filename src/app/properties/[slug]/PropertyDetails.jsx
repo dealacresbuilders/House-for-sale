@@ -5,7 +5,7 @@ import PropertyCard from "@/components/PropertyCard";
 import Image from "next/image";
 import { useState } from "react";
 import { useProperty } from "@/contextapi/propertycontext";
-
+import Breadcrumb from "@/components/Breadcrumb";
 export default function PropertyDetails({ propertyy }) {
   const [open, setOpen] = useState(false);
   const { properties: allProperties } = useProperty();
@@ -33,7 +33,9 @@ export default function PropertyDetails({ propertyy }) {
   return (
     <div className="bg-[#F9FAFB] text-gray-900 px-4 sm:px-6 py-14">
       <div className="max-w-7xl mx-auto">
-
+<div className="mb-6">
+   <Breadcrumb property={propertyy}/>
+  </div>
         {/* ================= TOP GRID ================= */}
         <div className="grid grid-cols-1 md:grid-cols-[420px_1fr] gap-14 items-start">
 
