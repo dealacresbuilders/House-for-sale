@@ -9,7 +9,7 @@ import ContactPopup from "@/components/ContactPopup";
 import SidebarEnquiryForm from "@/components/SidebarEnquiryForm";
 import Pagination from "@/components/Pagination";
 import BHKFilterButtons from "@/components/BHKFilterButtons";
-
+import Breadcrumb from "@/components/Breadcrumb";
 export default function PropertyTypePage() {
 
     const { propertyType } = useParams();
@@ -47,6 +47,9 @@ useEffect(() => {
     fetchPropertiesByType(`${bhk} BHK`, 1);
   }
 }, [bhk]);
+useEffect(() => {
+  localStorage.setItem("lastListing", window.location.pathname);
+}, []);
 
     /* ================= FORMAT AREA ================= */
 
@@ -111,7 +114,9 @@ useEffect(() => {
             {/* HEADING */}
 
             <div className="max-w-7xl mx-auto mb-12">
-
+<div className="mb-6">
+   <Breadcrumb />
+  </div>
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
                     {bhk} BHK Houses For Sale in Faridabad
                 </h1>
