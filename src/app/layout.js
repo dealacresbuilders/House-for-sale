@@ -18,26 +18,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-title: "House for Sale in Faridabad | Independent Houses, Villas & Floors",
+title: "House for Sale in Faridabad | Affordable Homes & Independent Houses at Best Price",
 
 description:
-"Find verified houses for sale in Faridabad including independent houses, builder floors, and villas at best prices. Explore ready to move and new residential projects in prime locations of Faridabad.",
+" Find verified houses for sale in Faridabad. Explore affordable 2 BHK & 3 BHK independent houses, builder floors & villas in Sector 82, 85, 86, 88, Neharpar, Sainik Colony & more. No brokerage. Easy home loan. Book free site visit today.",
 
 keywords: [
-  "house for sale faridabad",
-  "independent house for sale faridabad",
-  "villa for sale faridabad",
-  "builder floor for sale faridabad",
-  "buy house in faridabad",
-  "residential property for sale faridabad",
-  "ready to move house faridabad",
-  "new houses in faridabad",
-  "luxury house faridabad",
-  "property for sale faridabad"
+ "house for sale in Faridabad", "buy house in Faridabad", "independent house for sale Faridabad", "home for sale Faridabad", "2 BHK house for sale Faridabad", "3 BHK house for sale Faridabad", "affordable house Faridabad", "villa for sale Faridabad", "no brokerage house Faridabad", "house price Faridabad", "house for sale Sainik Colony Faridabad", "property for sale Faridabad"
 ],
 
   alternates: {
-    canonical: "https://www.flatforsaleinfaridabad.com/",
+    canonical: "https://www.houseforsaleinfaridabad.com/",
   },
   verification: {
     google: "qEQA5ym54a67R2c2BGTGm04-sUm__OS7txES7rB9Rz4",

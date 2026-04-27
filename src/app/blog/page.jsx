@@ -1,40 +1,27 @@
-import React from 'react'
+import React from "react";
+import BlogList from "./BlogList";
 
-import { headers } from "next/headers";
-import BlogList from './BlogList';
-export async function generateMetadata() {
-  const h = await headers();
-  const domain = h.get("host") || "localhost";
+export const metadata = {
+  title: "Real Estate Blog | House Buying Tips, Property News & Market Trends in Faridabad",
 
-  // www remove
-  const cleanDomain = domain.replace(/^www\./, "");
+  description:
+    "Read expert blogs on house buying tips in Faridabad, property market trends, home loan advice, best localities to invest, legal guide & expert real estate advice to help you make the smartest property decision.",
 
-  return {
-    title: "Property & Real Estate Blogs | Trusted Property Dealer",
-    description:
-      "Read latest property and real estate blogs. Get house buying tips, flat rent guides, plot investment ideas and property news.",
-    keywords: [
-      "property blogs",
-      "real estate blogs",
-      "house buying tips",
-      "flat rent guide",
-      "plot investment",
-      "property news"
-    ],
-    alternates: {
-      canonical: `https://${cleanDomain}/blog`
-    },
-  }
-}
+  keywords: [
+   "real estate blog Faridabad", "house buying tips Faridabad", "property market trends Faridabad", "home loan advice Faridabad", "best localities for houses Faridabad", "real estate news Faridabad", "house investment Faridabad", "Faridabad housing guide", "house price trends Faridabad", "independent house buying checklist Faridabad"
+  ],
 
-
+  alternates: {
+    canonical: "https://www.houseforsaleinfaridabad.com/blog",
+  },
+};
 
 const page = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-yellow-50 to-yellow-50">
-    <BlogList/>
+      <BlogList />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -42,18 +42,18 @@ export async function generateMetadata({ params }) {
 
   if (!single) {
     return {
-      title: "Parcharmanch – Blog",
-      description: "Explore the latest blogs and articles on Parcharmanch.",
+      title: "House for Sale in Faridabad – Blog",
+      description: "Explore the latest blogs and articles on House for Sale in Faridabad.",
     };
   }
 
   return {
-    title: single?.MetaTitle || single?.Title || "Parcharmanch Blog",
+    title: single?.MetaTitle || single?.Title || "House for Sale in Faridabad Blog",
     description:
       single?.MetaDescription ||
-      "Read insightful stories and blogs on Parcharmanch.",
+      "Read insightful stories and blogs on House for Sale in Faridabad.",
     alternates: {
-      canonical: `https://www.parcharmanch.in/blog/${slug}`,
+      canonical: `https://www.houseforsaleinfaridabad.com/blog/${slug}`,
     },
   };
 }

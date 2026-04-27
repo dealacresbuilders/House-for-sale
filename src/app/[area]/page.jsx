@@ -1,6 +1,37 @@
 import FilterProperties from "./FilterProperties";
 import SidebarEnquiryForm from "@/components/SidebarEnquiryForm";
 import Breadcrumb from "@/components/Breadcrumb";
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const rawArea = resolvedParams?.area;
+
+  const area = rawArea?.replace("house-for-sale-in-", "");
+
+  const formattedArea = area
+    ?.replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const locationName = formattedArea || "Faridabad";
+
+  return {
+    title: `Houses for Sale in ${locationName} | Buy Independent House & Villas`,
+
+    description: `Explore houses for sale in ${locationName}. Find independent houses, villas, and residential homes in prime locations with modern amenities and strong investment potential in ${locationName}.`,
+
+    keywords: [
+      `houses for sale in ${locationName}`,
+      `buy house ${locationName}`,
+      `independent house ${locationName}`,
+      `villa for sale ${locationName}`,
+      `${locationName} property for sale`,
+      `${locationName} residential homes`,
+    ],
+
+    alternates: {
+      canonical: `https://www.houseforsaleinfaridabad.com/${rawArea}`,
+    },
+  };
+}
 export default async function Page({ params }) {
   const resolvedParams = await params;
   
