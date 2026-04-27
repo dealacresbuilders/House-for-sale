@@ -95,9 +95,9 @@ export default function Properties() {
     >
      {/* PAGE HEADING */}
 <div className="max-w-7xl mx-auto mb-12">
-  <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+  <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
     Premium Residential House For Sale Properties in Faridabad
-  </h1>
+  </h2>
 
   <p className="mt-4 text-gray-500 max-w-2xl">
     Explore high-potential houses and Residential spaces available for sale

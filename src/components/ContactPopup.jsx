@@ -74,9 +74,9 @@ export default function ContactPopup({ isOpen, onClose, propertyTitle }) {
           ×
         </button>
 
-        <h3 className="text-2xl font-semibold text-gray-900">
+        <h2 className="text-2xl font-semibold text-gray-900">
           Get Best Price Details
-        </h3>
+        </h2>
 
         <p className="text-sm text-gray-600 mt-3 mb-7 leading-relaxed">
           Enquiry for:
