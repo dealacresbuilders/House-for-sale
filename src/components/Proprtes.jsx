@@ -12,31 +12,14 @@ import BHKFilterButtons from "@/components/BHKFilterButtons";
 import { useSearchParams } from "next/navigation";
 
 export default function Properties() {
-  const {
-  properties,
-  loading,
-  error,
-  
-} = useProperty();
+  const { properties, loading, error, page2, setPage2,
+    totalItems, itemsPerPage, } = useProperty();
   const [open, setOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   const propertySectionRef = useRef(null);
 
-  const itemsPerPage = 150;
-
-
-// useEffect(() => {
-//   setCurrentPage(1);
-
-//   if (bhk) {
-//     console.log("BHK Triggered:", bhk);  // 👈 ye add karo
-//     fetchPropertiesByType(bhk);
-//   } else {
-//     refetch();
-//   }
-// }, [bhk]);
   const formatArea = (area, unit) => {
     if (!area) return "N/A";
     const formattedNumber = Number(area).toLocaleString("en-IN");
@@ -81,11 +64,6 @@ export default function Properties() {
     );
   }
 
-  /* ================= PAGINATION LOGIC ================= */
-  const totalItems = properties.length;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentProperties = properties.slice(startIndex, endIndex);
 
   return (
     <section
@@ -115,7 +93,7 @@ export default function Properties() {
 
         {/* LEFT SIDE */}
         <div className="lg:col-span-2 space-y-8">
-          {currentProperties.map((property) => (
+          {properties.map((property) => (
             <div
               key={property._id}
               className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden md:h-[250px]"
@@ -257,18 +235,8 @@ export default function Properties() {
             <Pagination
               totalItems={totalItems}
               itemsPerPage={itemsPerPage}
-              currentPage={currentPage}
-              onPageChange={(page) => {
-                setCurrentPage(page);
-
-                const yOffset = -90;
-                const y =
-                  propertySectionRef.current.getBoundingClientRect().top +
-                  window.pageYOffset +
-                  yOffset;
-
-                window.scrollTo({ top: y, behavior: "smooth" });
-              }}
+              currentPage={page2}
+              onPageChange={setPage2}
             />
           </div>
 
