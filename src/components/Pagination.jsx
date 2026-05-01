@@ -21,17 +21,43 @@ export default function Pagination({
       start = Math.max(1, end - maxVisible + 1);
     }
 
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    return Array.from(
+      { length: end - start + 1 },
+      (_, i) => start + i
+    );
   };
 
   const visiblePages = getVisiblePages();
+
+  // 🔥 COMMON PAGE CHANGE + AUTO SCROLL
+  const handlePageChange = (page) => {
+    onPageChange(page);
+
+    setTimeout(() => {
+      const section =
+        document.getElementById("locations") ||
+        document.getElementById("property-section");
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
+  };
 
   return (
     <div className="flex justify-center items-center gap-1 sm:gap-3 mt-10 sm:mt-14 flex-wrap">
 
       {/* PREV */}
       <button
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm rounded-md sm:rounded-xl border border-orange-200 
         text-[#FF6500] disabled:opacity-40
@@ -44,7 +70,7 @@ export default function Pagination({
       {visiblePages[0] > 1 && (
         <>
           <button
-            onClick={() => onPageChange(1)}
+            onClick={() => handlePageChange(1)}
             className="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm rounded-md sm:rounded-xl border border-orange-200 
             text-[#FF6500] hover:bg-orange-50 transition"
           >
@@ -52,7 +78,9 @@ export default function Pagination({
           </button>
 
           {visiblePages[0] > 2 && (
-            <span className="px-1 sm:px-2 text-gray-400 text-xs sm:text-sm">...</span>
+            <span className="px-1 sm:px-2 text-gray-400 text-xs sm:text-sm">
+              ...
+            </span>
           )}
         </>
       )}
@@ -61,7 +89,7 @@ export default function Pagination({
       {visiblePages.map((page) => (
         <button
           key={page}
-          onClick={() => onPageChange(page)}
+          onClick={() => handlePageChange(page)}
           className={`px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm rounded-md sm:rounded-xl font-medium transition
             ${
               currentPage === page
@@ -76,12 +104,15 @@ export default function Pagination({
       {/* LAST PAGE */}
       {visiblePages[visiblePages.length - 1] < totalPages && (
         <>
-          {visiblePages[visiblePages.length - 1] < totalPages - 1 && (
-            <span className="px-1 sm:px-2 text-gray-400 text-xs sm:text-sm">...</span>
+          {visiblePages[visiblePages.length - 1] <
+            totalPages - 1 && (
+            <span className="px-1 sm:px-2 text-gray-400 text-xs sm:text-sm">
+              ...
+            </span>
           )}
 
           <button
-            onClick={() => onPageChange(totalPages)}
+            onClick={() => handlePageChange(totalPages)}
             className="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm rounded-md sm:rounded-xl border border-orange-200 
             text-[#FF6500] hover:bg-orange-50 transition"
           >
@@ -92,7 +123,7 @@ export default function Pagination({
 
       {/* NEXT */}
       <button
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm rounded-md sm:rounded-xl border border-orange-200 
         text-[#FF6500] disabled:opacity-40
@@ -100,7 +131,6 @@ export default function Pagination({
       >
         Next
       </button>
-
     </div>
   );
 }
