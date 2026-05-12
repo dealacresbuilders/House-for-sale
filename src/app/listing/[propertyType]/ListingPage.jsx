@@ -7,49 +7,53 @@ import Image from "next/image";
 import Link from "next/link";
 import ContactPopup from "@/components/ContactPopup";
 import SidebarEnquiryForm from "@/components/SidebarEnquiryForm";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/components/PaginationTwo";
 import BHKFilterButtons from "@/components/BHKFilterButtons";
 import Breadcrumb from "@/components/Breadcrumb";
 export default function PropertyTypePage() {
 
-    const { propertyType } = useParams();
+  const { propertyType } = useParams();
 
-    const {
-        bhkProperties,
-        loading3,
-        error3,
-        fetchPropertiesByType,
-        page,
-        totalPages
-    } = useProperty();
+  const {
+   data2,
+    loading3,
+    error3,
+    fetchPropertiesByType,
+    page,
+    setPage,
+    totalPages,type,setType
+  } = useProperty();
+  console.log("PROPERTIES BY TYPE:", page,totalPages);
 
-    const [open, setOpen] = useState(false);
-    const [selectedProperty, setSelectedProperty] = useState("");
+  const [open, setOpen] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState("");
 
-    const propertySectionRef = useRef(null);
+  const propertySectionRef = useRef(null);
 
-    /* ================= FETCH ================= */
+  /* ================= FETCH BY TYPE ================= */
 
-    // useEffect(() => {
+ const bhk = propertyType?.split("-")[0];
+  useEffect(() => {
 
-    //     if (propertyType) {
-    //         fetchPropertiesByType(`${propertyType} BHK`, 1);
-    //     }
-
-    // }, [propertyType]);
-    // const { propertyType } = useParams();
-
-// ✅ CLEAN BHK
-const bhk = propertyType?.split("-")[0];
-
-useEffect(() => {
   if (bhk) {
-    fetchPropertiesByType(`${bhk} BHK`, 1);
+
+    setPage(1);
+
+    setType(`${bhk} BHK`);
+
   }
+
 }, [bhk]);
-useEffect(() => {
-  localStorage.setItem("lastListing", window.location.pathname);
-}, []);
+
+  /* ================= FORMAT AREA ================= */
+  useEffect(() => {
+  if (!loading3 &&data2.length > 0) {
+    propertySectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+}, [data2]);
 
     /* ================= FORMAT AREA ================= */
 
@@ -91,7 +95,7 @@ useEffect(() => {
         );
     }
 
-    if (!bhkProperties || bhkProperties.length === 0) {
+   if (!data2 ||data2.length === 0) {
         return (
             <div className="text-center py-20">
                 <h2 className="text-2xl font-semibold text-gray-800">
@@ -140,7 +144,7 @@ useEffect(() => {
 
                 <div className="lg:col-span-2 space-y-8">
 
-                    {bhkProperties.map((property) => (
+                    {data2.map((property) => (
 
                         <div
                             key={property._id}
@@ -273,22 +277,9 @@ useEffect(() => {
                     <div className="mt-16">
 
                         <Pagination
-                            currentPage={page}
-                            totalPages={totalPages}
-                            onPageChange={(newPage) => {
-
-                                fetchPropertiesByType(`${propertyType} BHK`, newPage);
-
-                                setTimeout(() => {
-
-                                    window.scrollTo({
-                                        top: 0,
-                                        behavior: "smooth"
-                                    });
-
-                                }, 100);
-
-                            }}
+                            page={page}
+  totalPages={totalPages}
+  setPage={setPage}
                         />
 
                     </div>

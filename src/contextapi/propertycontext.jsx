@@ -51,36 +51,51 @@ setTotalItems(res.data?.total)
 
   // ================= BHK TYPE FILTER WITH PAGINATION =================
 
-  const [bhkProperties, setBhkProperties] = useState([]);
   const [loading3, setLoading3] = useState(false);
-  const [error3, setError3] = useState(null);
+const [error3, setError3] = useState(null);
 
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+const [data2, setData2] = useState([]);
 
-  const fetchPropertiesByType = async (type, pageNumber = 1) => {
+const [page, setPage] = useState(1);
+const [totalPages, setTotalPages] = useState(1);
 
-    try {
+const [type, setType] = useState("");
 
-      setLoading3(true);
-      setError3(null);
+const fetchPropertiesByType = async () => {
 
-      const res = await axios.get(
-        `https://faridabad-backend.onrender.com/api/listed-properties/getPropertiesByType/${type}/${domain}?page=${pageNumber}`
-      );
+  try {
 
-      setBhkProperties(res.data?.data || []);
-      setPage(res.data?.page || 1);
-      setTotalPages(res.data?.totalPages || 1);
+    if (!type) return;
 
-    } catch (err) {
+    setLoading3(true);
+    setError3(null);
 
-      setError3("BHK properties load nahi ho paayi");
+    const res = await axios.get(
+      `https://faridabad-backend.onrender.com/api/listed-properties/getPropertiesByType/${type}/${domain}?page=${page}`
+    );
 
-    } finally {
-      setLoading3(false);
-    }
-  };
+    setData2(res.data?.data || []);
+
+    setTotalPages(res.data?.totalPages || 1);
+
+  } catch (err) {
+
+    setError3("Type filter failed");
+
+  } finally {
+
+    setLoading3(false);
+
+  }
+};
+
+useEffect(() => {
+
+  if (type) {
+    fetchPropertiesByType();
+  }
+
+}, [page, type]);
 
   // ================= LOCALITY BASED =================
 
@@ -133,14 +148,14 @@ setTotalItems(res.data?.total)
         refetch: getPropertiesByDomain,
 page2,setPage2,totalItems,itemsPerPage:limit,
         // BHK filter
-        bhkProperties,
+        
         loading3,
         error3,
         fetchPropertiesByType,
         page,
         totalPages,
         setPage,
-
+data2,setData2,type,setType,
         // locality
         data,
         loading2,
