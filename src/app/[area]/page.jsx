@@ -1,93 +1,208 @@
 import FilterProperties from "./FilterProperties";
 import SidebarEnquiryForm from "@/components/SidebarEnquiryForm";
 import Breadcrumb from "@/components/Breadcrumb";
-export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
-  const rawArea = resolvedParams?.area;
+import HisarMarketOverview from "./HisarMarketOverview";
 
-  const area = rawArea?.replace("house-for-sale-in-", "");
+// ✅ GET SEO DATA
 
-  const formattedArea = area
-    ?.replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+async function getDealerMeta(
+  slug
+) {
+  try {
 
-  const locationName = formattedArea || "Faridabad";
+    const domain =
+      "www.houseforsaleinfaridabad.com";
+
+    const res =
+      await fetch(
+        `https://faridabad-backend.onrender.com/api/add/get-dealer-meta/${slug}?domain=${domain}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+    if (!res.ok)
+      return null;
+
+    const data =
+      await res.json();
+
+    return (
+      data?.data || null
+    );
+
+  } catch (error) {
+
+    console.log(error);
+
+    return null;
+
+  }
+}
+
+export async function generateMetadata({
+  params,
+}) {
+
+  const resolvedParams =
+    await params;
+
+  const rawArea =
+    resolvedParams?.area;
+
+  // ✅ CLEAN SLUG
+
+  const area =
+    rawArea?.replace(
+      "house-for-sale-in-",
+      ""
+    );
+
+  // ✅ FORMATTED LOCATION
+
+  const formattedArea =
+    area
+      ?.replace(/-/g, " ")
+      .replace(
+        /\b\w/g,
+        (c) =>
+          c.toUpperCase()
+      );
+
+  // ✅ API CALL
+
+  const seoData =
+    await getDealerMeta(
+      area
+    );
+
+  // ✅ FALLBACK META
+
+  const fallbackTitle =
+    ` ${formattedArea}`;
+
+  const fallbackDescription =
+    `${formattedArea}`;
 
   return {
-    title: `Houses for Sale in ${locationName} | Buy Independent House & Villas`,
+    title:
+      seoData?.metaTitle ||
+      fallbackTitle,
 
-    description: `Explore houses for sale in ${locationName}. Find independent houses, villas, and residential homes in prime locations with modern amenities and strong investment potential in ${locationName}.`,
-
-    keywords: [
-      `houses for sale in ${locationName}`,
-      `buy house ${locationName}`,
-      `independent house ${locationName}`,
-      `villa for sale ${locationName}`,
-      `${locationName} property for sale`,
-      `${locationName} residential homes`,
-    ],
+    description:
+      seoData?.metaDescription ||
+      fallbackDescription,
 
     alternates: {
-      canonical: `https://www.houseforsaleinfaridabad.com/${rawArea}`,
+      canonical:
+        `https://www.houseforsaleinfaridabad.com/${rawArea}`,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
-export default async function Page({ params }) {
-  const resolvedParams = await params;
-  
 
-  // slug format → sector-9 → Sector 9
-  const rawArea = resolvedParams?.area;
+export default async function Page({
+  params,
+}) {
 
-// ✅ CLEAN SLUG (IMPORTANT)
-const area = rawArea?.replace("house-for-sale-in-", "");
+  const resolvedParams =
+    await params;
 
-// slug format → sector-9 → Sector 9
-const formattedArea = area
-  ?.replace(/-/g, " ")
-  .replace(/\b\w/g, (c) => c.toUpperCase());
+  const rawArea =
+    resolvedParams?.area;
+
+  // ✅ CLEAN SLUG
+
+  const area =
+    rawArea?.replace(
+      "house-for-sale-in-",
+      ""
+    );
+
+  // ✅ FORMATTED AREA
+
+  const formattedArea =
+    area
+      ?.replace(/-/g, " ")
+      .replace(
+        /\b\w/g,
+        (c) =>
+          c.toUpperCase()
+      );
+
+  // ✅ API CALL
+
+  const seoData =
+    await getDealerMeta(
+      area
+    );
 
   return (
     <div className="bg-[#F5F7FA] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-10">
-<div className="mb-6">
-   <Breadcrumb />
-  </div>
+
+        <div className="mb-6">
+          <Breadcrumb />
+        </div>
+
         {/* 🔥 DYNAMIC HEADING */}
-        <div className=" mb-14">
+
+        <div className="mb-14">
+
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-          House For Sale in{" "}
+
+            House For Sale in{" "}
+
             <span className="text-[#FF6500]">
-              {formattedArea || "Faridabad"}
+              {formattedArea ||
+                "Faridabad"}
             </span>
+
           </h1>
 
-          <h2 className="text-gray-600 mt-3">
-            Residential properties in prime business locations.
-          </h2>
+         
 
           <div className="w-20 h-1 bg-[#FF6500] mt-6 rounded-full"></div>
+
         </div>
 
         {/* 🔥 MAIN GRID */}
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
           {/* LEFT SIDE */}
-          <div className="lg:col-span-8 space-y-6">
-  <FilterProperties area={area} />
 
-  {/* Only show Properties if area not selected */}
-   {/* <Proprtes /> */}
-</div>
+          <div className="lg:col-span-8 space-y-6">
+
+            <FilterProperties
+              area={area}
+            />
+
+          </div>
+
 
           {/* RIGHT SIDE */}
+
           <div className="lg:col-span-4">
+
             <div className="sticky top-24">
+
               <SidebarEnquiryForm />
+
             </div>
+
           </div>
 
         </div>
+       <HisarMarketOverview
+  pageContent={
+    seoData?.pageContent
+  }
+/>
 
       </div>
     </div>
