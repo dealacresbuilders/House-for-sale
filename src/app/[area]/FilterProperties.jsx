@@ -244,7 +244,7 @@ export default function FilterProperties({ area }) {
                     {/* VIEW DETAILS (UNCHANGED STYLE) */}
                     <Link
                       href={`/properties/${property.slug}`}
-                      className="text-[#FF6500] text-sm font-medium hover:underline cursor-pointer"
+                      className="text-[#FF6500] text-sm font-medium hover:underline cursor-pointer pointer-events-none"
                     >
                       View Details →
                     </Link>
