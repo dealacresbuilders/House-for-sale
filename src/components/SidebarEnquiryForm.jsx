@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-
+import toast from "react-hot-toast";
 const SidebarEnquiryForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -10,6 +10,7 @@ const SidebarEnquiryForm = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,42 +24,70 @@ const SidebarEnquiryForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (formData.phone.length !== 10) {
-      alert("Please enter valid 10 digit number");
-      return;
-    }
+  if (formData.phone.length !== 10) {
+    toast.error("Phone number must be exactly 10 digits.");
+    return;
+  }
 
-    try {
-      setLoading(true);
+  const website =
+    typeof window !== "undefined"
+      ? window.location.hostname.replace("www.", "")
+      : "";
 
-      const res = await fetch("/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          source: "Sidebar Enquiry Form",
-        }),
+  try {
+    setLoading(true);
+
+    const payload = {
+      ...formData,
+      website,
+      source:
+        "Residential Sidebar Enquiry — Buy House in Faridabad",
+    };
+
+    console.log("PAYLOAD:", payload);
+
+    const res = await fetch("/api/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    console.log("STATUS:", res.status);
+
+    const data = await res.json();
+
+    console.log("RESPONSE:", data);
+
+    if (data.success) {
+      toast.success(
+        "Your enquiry has been submitted successfully!"
+      );
+
+      setFormData({
+        name: "",
+        phone: "",
+        message: "",
       });
-
-      const data = await res.json();
-
-      if (data.success) {
-        alert("Request submitted successfully!");
-        setFormData({ name: "", phone: "", message: "" });
-      } else {
-        alert("Something went wrong!");
-      }
-
-    } catch (error) {
-      alert("Server error!");
-    } finally {
-      setLoading(false);
+    } else {
+      toast.error(
+        data.message ||
+          "Something went wrong. Please try again."
+      );
     }
-  };
+  } catch (err) {
+    console.log("ERROR:", err);
+
+    toast.error(
+      "Server error. Please try again later."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="sticky top-28 bg-white rounded-2xl shadow-lg p-8 border border-[#E5E7EB]">
