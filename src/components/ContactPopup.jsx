@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useState, useEffect } from "react";
+import AlertPopup from "@/components/AlertPopup";
 
 export default function ContactPopup({
   isOpen,
@@ -16,6 +16,23 @@ export default function ContactPopup({
 
   const [loading, setLoading] = useState(false);
 
+  const [popup, setPopup] = useState({
+    open: false,
+    type: "",
+    message: "",
+  });
+
+  // ✅ AUTO CLOSE ALERT AFTER 2.5s
+  useEffect(() => {
+    if (popup.open) {
+      const timer = setTimeout(() => {
+        setPopup({ open: false, type: "", message: "" });
+      }, 2500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [popup.open]);
+
   if (!isOpen) return null;
 
   const handleChange = (e) => {
@@ -23,10 +40,7 @@ export default function ContactPopup({
 
     // PHONE VALIDATION
     if (name === "phone") {
-      // only numbers
       if (!/^\d*$/.test(value)) return;
-
-      // max 10 digits
       if (value.length > 10) return;
     }
 
@@ -39,22 +53,15 @@ export default function ContactPopup({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // PHONE CHECK
+    // VALIDATION
     if (formData.phone.length !== 10) {
-      toast.error(
-        "Phone number must be exactly 10 digits"
-      );
+      setPopup({
+        open: true,
+        type: "error",
+        message: "Phone number must be 10 digits",
+      });
       return;
     }
-
-    // WEBSITE
-    const website =
-      typeof window !== "undefined"
-        ? window.location.hostname.replace(
-            "www.",
-            ""
-          )
-        : "";
 
     try {
       setLoading(true);
@@ -62,31 +69,26 @@ export default function ContactPopup({
       const payload = {
         ...formData,
         propertyTitle,
-        website,
+        website: "houseforsaleinfaridabad.com",
         source: "Popup Enquiry",
       };
-
-      console.log("PAYLOAD:", payload);
 
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: {
-          "Content-Type":
-            "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
 
-      console.log("STATUS:", res.status);
-
       const data = await res.json();
 
-      console.log("RESPONSE:", data);
-
       if (data.success) {
-        toast.success(
-          "Enquiry Submitted Successfully!"
-        );
+        setPopup({
+          open: true,
+          type: "success",
+          message: "Enquiry submitted successfully!",
+        });
 
         setFormData({
           name: "",
@@ -94,19 +96,25 @@ export default function ContactPopup({
           message: "",
         });
 
-        onClose();
-      } else {
-        toast.error(
-          data.message ||
-            "Something went wrong"
-        );
-      }
-    } catch (err) {
-      console.log("ERROR:", err);
+        // close modal after success
+        setTimeout(() => {
+          onClose?.();
+        }, 1200);
 
-      toast.error(
-        "Server error. Please try again later."
-      );
+      } else {
+        setPopup({
+          open: true,
+          type: "error",
+          message: data.message || "Something went wrong!",
+        });
+      }
+
+    } catch (err) {
+      setPopup({
+        open: true,
+        type: "error",
+        message: "Server error. Please try later.",
+      });
     } finally {
       setLoading(false);
     }
@@ -114,6 +122,17 @@ export default function ContactPopup({
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+
+      {/* ALERT POPUP */}
+      <AlertPopup
+        open={popup.open}
+        type={popup.type}
+        message={popup.message}
+        onClose={() =>
+          setPopup({ open: false, type: "", message: "" })
+        }
+      />
+
       <div className="bg-white w-full max-w-md rounded-2xl p-8 shadow-2xl relative border border-gray-100">
 
         <button
@@ -127,7 +146,7 @@ export default function ContactPopup({
           Get Best Price Details
         </h2>
 
-        <p className="text-sm text-gray-600 mt-3 mb-7 leading-relaxed">
+        <p className="text-sm text-gray-600 mt-3 mb-7">
           Enquiry for:
           <span className="block font-medium text-gray-900 mt-1">
             {propertyTitle}
@@ -144,7 +163,7 @@ export default function ContactPopup({
             onChange={handleChange}
             className="w-full px-4 py-3 border border-gray-300 rounded-xl 
             focus:ring-2 focus:ring-[#F97316] focus:border-[#F97316]
-            outline-none transition placeholder:text-gray-500 placeholder:italic"
+            outline-none transition placeholder:text-gray-500"
           />
 
           <input
@@ -155,7 +174,7 @@ export default function ContactPopup({
             onChange={handleChange}
             className="w-full px-4 py-3 border border-gray-300 rounded-xl 
             focus:ring-2 focus:ring-[#F97316] focus:border-[#F97316]
-            outline-none transition placeholder:text-gray-500 placeholder:italic"
+            outline-none transition placeholder:text-gray-500"
           />
 
           <textarea
@@ -166,7 +185,7 @@ export default function ContactPopup({
             onChange={handleChange}
             className="w-full px-4 py-3 border border-gray-300 rounded-xl 
             focus:ring-2 focus:ring-[#F97316] focus:border-[#F97316]
-            outline-none resize-none transition placeholder:text-gray-500 placeholder:italic"
+            outline-none resize-none transition placeholder:text-gray-500"
           />
 
           <button

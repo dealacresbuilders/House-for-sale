@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import AlertPopup from "@/components/AlertPopup";
 const HeroSection = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -10,12 +11,14 @@ const HeroSection = () => {
     message: "",
   });
 
-  const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(false);
+  const [popup, setPopup] = useState({
+  open: false,
+  type: "",
+  message: "",
+});
 
-  const website =
-    typeof window !== "undefined"
-      ? window.location.hostname.replace("www.", "")
-      : "";
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +35,11 @@ const HeroSection = () => {
     e.preventDefault();
 
     if (formData.phone.length !== 10) {
-      toast.error("Phone number must be 10 digits");
-      return;
+ setPopup({
+  open: true,
+  type: "error",
+  message: "Phone number must be 10 digits",
+});      return;
     }
 
     setLoading(true);
@@ -44,20 +50,32 @@ const HeroSection = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          website,
+          website:"houseforsaleinfaridabad.com",
         }),
       });
 
       const result = await res.json();
 
       if (result.success) {
-        toast.success("Enquiry submitted successfully!");
+setPopup({
+  open: true,
+  type: "success",
+  message: "Enquiry submitted successfully!",
+});
         setFormData({ name: "", phone: "", message: "" });
       } else {
-        toast.error("Something went wrong. Try again.");
+ setPopup({
+  open: true,
+  type: "error",
+  message: "Something went wrong. Try again.",
+});
       }
     } catch (err) {
-      toast.error("Server error. Please try later.");
+setPopup({
+  open: true,
+  type: "error",
+  message: "Server error. Please try later.",
+});
     } finally {
       setLoading(false);
     }
@@ -71,6 +89,18 @@ const HeroSection = () => {
           "url('https://images.unsplash.com/photo-1568605114967-8130f3a36994')",
       }}
     >
+    <AlertPopup
+    open={popup.open}
+    type={popup.type}
+    message={popup.message}
+    onClose={() =>
+      setPopup({
+        open: false,
+        type: "",
+        message: "",
+      })
+    }
+  />
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/65"></div>
 
