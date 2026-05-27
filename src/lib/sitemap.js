@@ -30,13 +30,13 @@ const apiDomain =
       <lastmod>${currentDate}</lastmod></url>
     <url><loc>${baseUrl}/how-it-works</loc>
       <lastmod>${currentDate}</lastmod></url>
-    <url><loc>${baseUrl}/listing/1-bhk-house-for-sale-faridabad</loc>
+    <url><loc>${baseUrl}/listing/1-bhk-houses-for-sale-faridabad</loc>
       <lastmod>${currentDate}</lastmod></url>
-    <url><loc>${baseUrl}/listing/2-bhk-house-for-sale-faridabad</loc>
+    <url><loc>${baseUrl}/listing/2-bhk-houses-for-sale-faridabad</loc>
       <lastmod>${currentDate}</lastmod></url>
-    <url><loc>${baseUrl}/listing/3-bhk-house-for-sale-faridabad</loc>
+    <url><loc>${baseUrl}/listing/3-bhk-houses-for-sale-faridabad</loc>
       <lastmod>${currentDate}</lastmod></url>
-    <url><loc>${baseUrl}/listing/4-bhk-house-for-sale-faridabad</loc>
+    <url><loc>${baseUrl}/listing/4-bhk-houses-for-sale-faridabad</loc>
       <lastmod>${currentDate}</lastmod></url>
 
   `;
@@ -47,7 +47,7 @@ try {
     `https://deal-acres-backend.onrender.com/newBlog/getSlugsByDomain/${apiDomain}`
   );
 
-  
+  // console.log("FULL RESPONSE:", res.data);
 
   // 🔥 RESPONSE HANDLE
   const slugs =
