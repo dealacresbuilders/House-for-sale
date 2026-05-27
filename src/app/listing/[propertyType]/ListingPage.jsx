@@ -10,6 +10,8 @@ import SidebarEnquiryForm from "@/components/SidebarEnquiryForm";
 import Pagination from "@/components/PaginationTwo";
 import BHKFilterButtons from "@/components/BHKFilterButtons";
 import Breadcrumb from "@/components/Breadcrumb";
+import { Fragment, useMemo } from "react";
+import FeaturedLocations from "@/components/FeaturedLocations";
 export default function PropertyTypePage() {
 
   const { propertyType } = useParams();
@@ -70,6 +72,18 @@ export default function PropertyTypePage() {
 
         return `${formattedNumber} ${formattedUnit}`;
     };
+
+
+
+    const localities = useMemo(() => {
+  return [
+    ...new Set(
+      data2
+        ?.map((item) => item?.locality)
+        .filter(Boolean)
+    ),
+  ];
+}, [data2]);
 
     /* ================= LOADING ================= */
 
@@ -144,10 +158,22 @@ export default function PropertyTypePage() {
 
                 <div className="lg:col-span-2 space-y-8">
 
-                    {data2.map((property) => (
+                    {data2.map((property, index) => {
+
+const featuredPosition = Math.floor(index / 30);
+
+const locationBatch =
+(index + 1) % 30 === 0
+? localities.slice(
+featuredPosition * 10,
+featuredPosition * 10 + 10
+)
+: [];
+
+return (
+<Fragment key={property._id}>
 
                         <div
-                            key={property._id}
                             className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden md:h-[250px]"
                         >
 
@@ -270,10 +296,18 @@ export default function PropertyTypePage() {
 
                             </div>
 
-                        </div>
+                       </div>
 
-                    ))}
+{locationBatch.length > 0 && (
+  <FeaturedLocations
+    locations={locationBatch}
+  />
+)}
 
+</Fragment>
+
+);
+})}
                     {/* PAGINATION */}
 
                     <div className="mt-16">
