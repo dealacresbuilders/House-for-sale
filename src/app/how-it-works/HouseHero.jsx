@@ -1,8 +1,13 @@
 "use client";
+import Breadcrumb from "@/components/Breadcrumb";
+
 
 export default function HouseHero() {
   return (
     <section className="w-full bg-[#F5F7FA] py-6 px-6 md:px-16">
+    <div className="mb-6 flex justify-start">
+   <Breadcrumb />
+  </div>
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
 
