@@ -283,7 +283,7 @@ return (
 
                                             <Link
                                                 href={`/properties/${property.slug}`}
-                                                className="border border-[#FF6500] text-[#FF6500] px-6 py-2 rounded-full hover:bg-orange-50 transition w-full md:w-auto text-center pointer-events-none"
+                                                className="border border-[#FF6500] text-[#FF6500] px-6 py-2 rounded-full hover:bg-orange-50 transition w-full md:w-auto text-center "
                                             >
                                                 View Details
                                             </Link>

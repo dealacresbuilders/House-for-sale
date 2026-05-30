@@ -243,7 +243,7 @@ export default function Properties() {
   }}
     className="border border-[#FF6500] text-[#FF6500] 
     px-4 sm:px-6 py-2 rounded-full hover:bg-orange-50 
-    transition w-full md:w-auto text-center font-medium text-sm pointer-events-none"
+    transition w-full md:w-auto text-center font-medium text-sm"
   >
     View Details
   </Link>
