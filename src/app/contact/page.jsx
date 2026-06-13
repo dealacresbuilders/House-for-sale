@@ -7,6 +7,10 @@ export const metadata = {
   keywords: [
   "contact house dealer Faridabad", "buy house Faridabad enquiry", "property consultation Faridabad", "house helpline Faridabad", "free site visit Faridabad", "no brokerage house enquiry Faridabad", "Faridabad property contact", "real estate office Faridabad", "house booking Faridabad", "independent house dealer contact Faridabad"
   ],
+  alternates: {
+    canonical:
+      "https://www.houseforsaleinfaridabad.com/contact",
+  },
 };
 
 export default function Page() {

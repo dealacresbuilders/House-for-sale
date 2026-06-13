@@ -26,7 +26,8 @@ export default function PropertyViewButton({
   );
 
   // 🔥 AUTO DAILY INCREASE
-  const dailyLimit = 50 + diffDays * 50;
+  const dailyLimit = 100 + diffDays * 100;
+/>
 
   // 🔥 TODAY KEY
   const today =

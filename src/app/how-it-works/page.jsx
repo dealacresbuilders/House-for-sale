@@ -14,7 +14,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: "https://www.houseforsaleinfaridabad.com/house-for-sale",
+    canonical: "https://www.houseforsaleinfaridabad.com/how-it-works",
   },
 };
 

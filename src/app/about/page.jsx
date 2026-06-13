@@ -8,6 +8,10 @@ export const metadata = {
   keywords: [
   "house dealers Faridabad", "trusted real estate agents Faridabad", "property consultants Faridabad", "verified houses Faridabad", "best property dealers Faridabad", "Faridabad real estate experts", "no brokerage house Faridabad", "about us real estate Faridabad", "independent house experts Faridabad", "home buying experts Faridabad"
   ],
+  alternates: {
+    canonical:
+      "https://www.houseforsaleinfaridabad.com/about",
+  },
 };
 
 export default function Page() {
