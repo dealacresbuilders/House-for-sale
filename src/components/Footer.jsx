@@ -44,8 +44,10 @@ export default function Footer() {
               <div key={index} className="relative group overflow-visible">
 
                 <Link
-                  href={`/house-for-sale-in-${createSlug(loc)}-faridabad`}
-                  className="block truncate text-gray-400 hover:text-[#F97316] transition duration-200"
+  key={index}
+  href={`https://www.dealacres.com/properties/house-for-sale-in-${createSlug(loc)}-faridabad`}
+  target="_blank"
+  rel="noopener noreferrer"                  className="block truncate text-gray-400 hover:text-[#F97316] transition duration-200"
                 >
                   House For Sale {loc}
                 </Link>
