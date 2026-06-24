@@ -52,7 +52,7 @@ export default function FeaturedLocations({
                   text-sm font-medium text-[#FF6500]
                   transition-all duration-300
                   hover:bg-[#FF6500]/30
-                  hover:text-white
+                  hover:text-white hover:border-white
                 "
               >
                 <MapPin
