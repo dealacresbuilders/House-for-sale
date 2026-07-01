@@ -11,6 +11,7 @@ import Pagination from "@/components/Pagination";
 import BHKFilterButtons from "@/components/BHKFilterButtons";
 import { useSearchParams } from "next/navigation";
 import FeaturedLocations from "./FeaturedLocations";
+import PropertyBottomLinks from "@/components/PropertyBottomLinks";
 
 export default function Properties() {
   const { properties, loading, error, page2, setPage2,
@@ -119,11 +120,11 @@ export default function Properties() {
                 {/* PROPERTY CARD */}
             <div
               // key={property._id}
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden md:h-[250px]"
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden md:h-[260px]"
             >
              <div className="flex flex-col md:flex-row h-full ">
 
-                <div className="relative md:w-[45%] h-[250px]">
+                <div className="relative md:w-[45%] h-[250px] md:h-full">
                   <Image
                     src={property?.media?.url
                       ? property?.media?.url 
@@ -249,7 +250,11 @@ export default function Properties() {
 
 </div>
                   </div>
-
+ <PropertyBottomLinks
+  propertyType={property.propertyType}
+  city="faridabad"
+  color="#FF6500"
+/>
                 </div>
               </div>
             </div>

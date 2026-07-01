@@ -12,50 +12,52 @@ import BHKFilterButtons from "@/components/BHKFilterButtons";
 import Breadcrumb from "@/components/Breadcrumb";
 import { Fragment, useMemo } from "react";
 import FeaturedLocations from "@/components/FeaturedLocations";
+import PropertyBottomLinks from "@/components/PropertyBottomLinks";
 export default function PropertyTypePage() {
 
-  const { propertyType } = useParams();
+    const { propertyType } = useParams();
 
-  const {
-   data2,
-    loading3,
-    error3,
-    fetchPropertiesByType,
-    page,
-    setPage,
-    totalPages,type,setType
-  } = useProperty();
-  console.log("PROPERTIES BY TYPE:", page,totalPages);
+    const {
+        data2,
+        loading3,
+        error3,
+        fetchPropertiesByType,
+        page,
+        setPage,
+        totalPages, type, setType,
+        areas
+    } = useProperty();
+    console.log("PROPERTIES BY TYPE:", page, totalPages);
 
-  const [open, setOpen] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState("");
+    const [open, setOpen] = useState(false);
+    const [selectedProperty, setSelectedProperty] = useState("");
 
-  const propertySectionRef = useRef(null);
+    const propertySectionRef = useRef(null);
 
-  /* ================= FETCH BY TYPE ================= */
+    /* ================= FETCH BY TYPE ================= */
 
- const bhk = propertyType?.split("-")[0];
-  useEffect(() => {
+    const bhk = propertyType?.split("-")[0];
+    useEffect(() => {
 
-  if (bhk) {
+        if (bhk) {
 
-    setPage(1);
+            setPage(1);
 
-    setType(`${bhk} BHK`);
+            setType(`${bhk} BHK`);
 
-  }
+        }
 
-}, [bhk]);
+    }, [bhk]);
 
-  /* ================= FORMAT AREA ================= */
-  useEffect(() => {
-  if (!loading3 &&data2.length > 0) {
-    propertySectionRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-}, [data2]);
+    /* ================= FORMAT AREA ================= */
+    useEffect(() => {
+        if (!loading3 && data2.length > 0) {
+            propertySectionRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+    }, [data2]);
 
     /* ================= FORMAT AREA ================= */
 
@@ -76,14 +78,14 @@ export default function PropertyTypePage() {
 
 
     const localities = useMemo(() => {
-  return [
-    ...new Set(
-      data2
-        ?.map((item) => item?.locality)
-        .filter(Boolean)
-    ),
-  ];
-}, [data2]);
+        return [
+            ...new Set(
+                data2
+                    ?.map((item) => item?.locality)
+                    .filter(Boolean)
+            ),
+        ];
+    }, [data2]);
 
     /* ================= LOADING ================= */
 
@@ -109,7 +111,7 @@ export default function PropertyTypePage() {
         );
     }
 
-   if (!data2 ||data2.length === 0) {
+    if (!data2 || data2.length === 0) {
         return (
             <div className="text-center py-20">
                 <h2 className="text-2xl font-semibold text-gray-800">
@@ -132,9 +134,9 @@ export default function PropertyTypePage() {
             {/* HEADING */}
 
             <div className="max-w-7xl mx-auto mb-12">
-<div className="mb-6">
-   <Breadcrumb />
-  </div>
+                <div className="mb-6">
+                    <Breadcrumb />
+                </div>
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
                     {bhk} BHK Houses For Sale in Faridabad
                 </h1>
@@ -160,162 +162,162 @@ export default function PropertyTypePage() {
 
                     {data2.map((property, index) => {
 
-const featuredPosition = Math.floor(index / 30);
+                        const areaBatch = areas?.slice(
+                            Math.floor(index / 30) * 10,
+                            Math.floor(index / 30) * 10 + 10
+                        ) || [];
 
-const locationBatch =
-(index + 1) % 30 === 0
-? localities.slice(
-featuredPosition * 10,
-featuredPosition * 10 + 10
-)
-: [];
+                        return (
+                            <Fragment key={property._id}>
 
-return (
-<Fragment key={property._id}>
+                                <div
+                                    className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden md:h-[260px]"
+                                >
 
-                        <div
-                            className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden md:h-[250px]"
-                        >
+                                    <div className="flex flex-col md:flex-row h-full">
 
-                            <div className="flex flex-col md:flex-row h-full">
+                                        <div className="relative md:w-[45%] h-[250px] md:h-full">
 
-                                <div className="relative md:w-[45%] h-[250px]">
+                                            <Image
+                                                src={property?.media?.url
+                                                    ? property?.media?.url
+                                                    : "https://res.cloudinary.com/do84xjpmx/image/upload/v1778824612/faridabadProperties/ycepxrlcn1l8sn01raaz.webp"}
+                                                unoptimized
+                                                alt={property.title}
+                                                width={600}
+                                                height={400}
+                                                className="w-full h-full object-cover"
+                                            />
 
-                                    <Image
-                                        src={property?.media?.url
-                      ? property?.media?.url 
-                      : "https://res.cloudinary.com/do84xjpmx/image/upload/v1778824612/faridabadProperties/ycepxrlcn1l8sn01raaz.webp"}
-                                        unoptimized
-                                        alt={property.title}
-                                        width={600}
-                                        height={400}
-                                        className="w-full h-full object-cover"
-                                    />
-
-                                </div>
-
-                                <div className="p-6 flex flex-col w-full min-w-0">
-  
-  <h2 className="text-lg font-bold text-gray-900 overflow-hidden md:whitespace-nowrap md:text-ellipsis">
-    {property.title}
-  </h2>
-
-                  <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-4 h-4 text-gray-400"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 21s-6-5.33-6-10a6 6 0 1112 0c0 4.67-6 10-6 10z"
-                      />
-                      <circle cx="12" cy="11" r="2.5" />
-                    </svg>
-
-                    {property.locality}
-                  </p>
-
-
-                                    <div className="mt-4 bg-gray-50 border border-gray-200 rounded-xl px-5 py-3 flex flex-wrap md:flex-nowrap items-center justify-between gap-3 text-sm">
-
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-gray-400 uppercase text-xs">
-                                                Area:
-                                            </span>
-                                            <span className="font-semibold text-gray-900">
-                                                {formatArea(property.area, property.areaUnit)}
-                                            </span>
                                         </div>
 
-                                        <div className="hidden md:block h-4 w-px bg-gray-300" />
+                                        <div className="p-6 flex flex-col w-full min-w-0">
 
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-gray-400 uppercase text-xs">
-                                                Type:
-                                            </span>
-                                            <span className="font-semibold text-gray-900">
-                                                {property.propertyCategory}
-                                            </span>
-                                        </div>
+                                            <h2 className="text-lg font-bold text-gray-900 overflow-hidden md:whitespace-nowrap md:text-ellipsis">
+                                                {property.title}
+                                            </h2>
 
-                                        <div className="hidden md:block h-4 w-px bg-gray-300" />
+                                            <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    className="w-4 h-4 text-gray-400"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M12 21s-6-5.33-6-10a6 6 0 1112 0c0 4.67-6 10-6 10z"
+                                                    />
+                                                    <circle cx="12" cy="11" r="2.5" />
+                                                </svg>
 
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-gray-400 uppercase text-xs">
-                                                Status:
-                                            </span>
-                                            <span className="font-semibold text-orange-600">
-                                                {property.status || "Ready to Move"}
-                                            </span>
-                                        </div>
+                                                {property.locality}
+                                            </p>
 
-                                    </div>
 
-                                    {/* <p className="text-sm text-gray-500 mt-4 line-clamp-2">
+                                            <div className="mt-4 bg-gray-50 border border-gray-200 rounded-xl px-5 py-3 flex flex-wrap md:flex-nowrap items-center justify-between gap-3 text-sm">
+
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-gray-400 uppercase text-xs">
+                                                        Area:
+                                                    </span>
+                                                    <span className="font-semibold text-gray-900">
+                                                        {formatArea(property.area, property.areaUnit)}
+                                                    </span>
+                                                </div>
+
+                                                <div className="hidden md:block h-4 w-px bg-gray-300" />
+
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-gray-400 uppercase text-xs">
+                                                        Type:
+                                                    </span>
+                                                    <span className="font-semibold text-gray-900">
+                                                        {property.propertyCategory}
+                                                    </span>
+                                                </div>
+
+                                                <div className="hidden md:block h-4 w-px bg-gray-300" />
+
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-gray-400 uppercase text-xs">
+                                                        Status:
+                                                    </span>
+                                                    <span className="font-semibold text-orange-600">
+                                                        {property.status || "Ready to Move"}
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                            {/* <p className="text-sm text-gray-500 mt-4 line-clamp-2">
                                         {property.description2 ||
                                             "High-value residential asset offering strong long-term growth."}
                                     </p> */}
 
-                                    <div className="flex-1" />
+                                            <div className="flex-1" />
 
-                                    <div className="flex flex-col md:flex-row justify-between  mt-5 gap-4">
+                                            <div className="flex flex-col md:flex-row justify-between  mt-5 gap-4">
 
-                                        <p className="text-2xl font-bold text-[#FF6500]">
-                                            ₹ {property.price?.toLocaleString("en-IN")}
-                                        </p>
+                                                <p className="text-2xl font-bold text-[#FF6500]">
+                                                    ₹ {property.price?.toLocaleString("en-IN")}
+                                                </p>
 
-                                        <div className="flex gap-3 w-full md:w-auto">
+                                                <div className="flex gap-3 w-full md:w-auto">
 
-                                            <button
-                                                onClick={() => {
-                                                    setSelectedProperty(property.title);
-                                                    setOpen(true);
-                                                }}
-                                                className="bg-[#FF6500] text-white px-6 py-2 rounded-full hover:bg-[#e65a00] transition w-full md:w-auto"
-                                            >
-                                                Contact Now
-                                            </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            setSelectedProperty(property.title);
+                                                            setOpen(true);
+                                                        }}
+                                                        className="bg-[#FF6500] text-white px-6 py-2 rounded-full hover:bg-[#e65a00] transition w-full md:w-auto"
+                                                    >
+                                                        Contact Now
+                                                    </button>
 
-                                            <Link
-                                                href={`/properties/${property.slug}`}
-                                                className="border border-[#FF6500] text-[#FF6500] px-6 py-2 rounded-full hover:bg-orange-50 transition w-full md:w-auto text-center "
-                                            >
-                                                View Details
-                                            </Link>
+                                                    <Link
+                                                        href={`/properties/${property.slug}`}
+                                                        className="border border-[#FF6500] text-[#FF6500] px-6 py-2 rounded-full hover:bg-orange-50 transition w-full md:w-auto text-center "
+                                                    >
+                                                        View Details
+                                                    </Link>
 
+                                                </div>
+
+                                            </div>
+                                            <PropertyBottomLinks
+                                                propertyType={property.propertyType}
+                                                city="faridabad"
+                                                color="#FF6500"
+                                            />
                                         </div>
 
                                     </div>
 
                                 </div>
 
-                            </div>
+                                {(index + 1) % 30 === 0 &&
+                                    areaBatch.length > 0 && (
+                                        <FeaturedLocations
+                                            locations={areaBatch}
+                                        />
+                                    )}
 
-                       </div>
+                            </Fragment>
 
-{locationBatch.length > 0 && (
-  <FeaturedLocations
-    locations={locationBatch}
-  />
-)}
-
-</Fragment>
-
-);
-})}
+                        );
+                    })}
                     {/* PAGINATION */}
 
                     <div className="mt-16">
 
                         <Pagination
                             page={page}
-  totalPages={totalPages}
-  setPage={setPage}
+                            totalPages={totalPages}
+                            setPage={setPage}
                         />
 
                     </div>
