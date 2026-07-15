@@ -39,7 +39,7 @@ export default function FeaturedLocations({
             return (
               <Link
                 key={index}
-                href={`https://www.dealacres.com/properties/house-for-sale-in-${location?.slug}`}
+                href={`https://www.dealacres.com/properties/house-for-sale-in-faridabad`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
