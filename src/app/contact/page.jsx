@@ -11,6 +11,10 @@ export const metadata = {
     canonical:
       "https://www.houseforsaleinfaridabad.com/contact",
   },
+   robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function Page() {

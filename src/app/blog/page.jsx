@@ -14,6 +14,10 @@ export const metadata = {
   alternates: {
     canonical: "https://www.houseforsaleinfaridabad.com/blog",
   },
+   robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const page = () => {

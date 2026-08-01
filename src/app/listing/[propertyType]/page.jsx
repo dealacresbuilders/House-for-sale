@@ -24,6 +24,10 @@ export async function generateMetadata({ params }) {
     alternates: {
       canonical: `https://www.houseforsaleinfaridabad.com/listing/${propertyType}`,
     },
+     robots: {
+    index: true,
+    follow: true,
+  },
   };
 }
 
