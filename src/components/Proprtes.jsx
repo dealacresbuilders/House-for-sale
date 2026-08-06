@@ -12,6 +12,7 @@ import BHKFilterButtons from "@/components/BHKFilterButtons";
 import { useSearchParams } from "next/navigation";
 import FeaturedLocations from "./FeaturedLocations";
 import PropertyBottomLinks from "@/components/PropertyBottomLinks";
+import PropertyViewButton from "./PropertyViewButton";
 
 export default function Properties() {
   const { properties, loading, error, page2, setPage2,
@@ -228,7 +229,7 @@ export default function Properties() {
     Contact Now
   </button>
 
-  <Link
+  {/* <Link
    href={`/properties/${property.slug}`}
   onClick={() => {
     localStorage.setItem("lastLocation", property.city);
@@ -246,7 +247,12 @@ export default function Properties() {
     transition w-full md:w-auto text-center font-medium text-sm"
   >
     View Details
-  </Link>
+  </Link> */}
+  <PropertyViewButton className="border border-[#FF6500] text-[#FF6500] 
+    px-4 sm:px-6 py-2 rounded-full hover:bg-orange-50 
+    transition w-full md:w-auto text-center font-medium text-sm"
+    slug={property.slug}
+  />
 
 </div>
                   </div>
