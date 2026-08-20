@@ -12,7 +12,8 @@ export default function PropertyBottomLinks({
     .trim()
     .replace(/[\s\W]+/g, "-");
 
-  const exploreLink = `https://www.dealacres.com/properties/${typeSlug}-for-sale-in-${city}`;
+  const exploreLink = "#"
+/* original: `https://www.dealacres.com/properties/${typeSlug}-for-sale-in-${city}` */;
 
   const handleDealAcresClick = (e) => {
     if (typeof window === "undefined") return;
@@ -86,7 +87,8 @@ export default function PropertyBottomLinks({
       <div className="h-4 w-px bg-gray-300"></div>
 
       <Link
-        href="https://www.dealacres.com/sell-property"
+        href="#"
+/* original: "https://www.dealacres.com/sell-property" */
         target="_blank"
         onClick={handleDealAcresClick}
         className="group flex items-center gap-1"
