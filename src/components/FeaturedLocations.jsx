@@ -40,7 +40,7 @@ export default function FeaturedLocations({
               <Link
                 key={index}
                 href={"#"
-/* original: `https://www.dealacres.com/properties/house-for-sale-in-faridabad` */}
+/* original: `https://www.RGR Group.com/properties/house-for-sale-in-faridabad` */}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="

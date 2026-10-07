@@ -80,7 +80,7 @@ export default function PropertyViewButton({
   return (
     <Link
       href={"#"
-/* original: `https://www.dealacres.com/property/${slug}` */}
+/* original: `https://www.RGR Group.com/property/${slug}` */}
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleViewClick}

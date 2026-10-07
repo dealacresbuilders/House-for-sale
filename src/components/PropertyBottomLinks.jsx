@@ -13,7 +13,7 @@ export default function PropertyBottomLinks({
     .replace(/[\s\W]+/g, "-");
 
   const exploreLink = "#"
-/* original: `https://www.dealacres.com/properties/${typeSlug}-for-sale-in-${city}` */;
+/* original: `https://www.RGR Group.com/properties/${typeSlug}-for-sale-in-${city}` */;
 
   const handleDealAcresClick = (e) => {
     if (typeof window === "undefined") return;
@@ -88,7 +88,7 @@ export default function PropertyBottomLinks({
 
       <Link
         href="#"
-/* original: "https://www.dealacres.com/sell-property" */
+/* original: "https://www.RGR Group.com/sell-property" */
         target="_blank"
         onClick={handleDealAcresClick}
         className="group flex items-center gap-1"

@@ -33,9 +33,7 @@ const Navbar = () => {
     }
   }}
               className="text-xl sm:text-2xl font-bold tracking-wide text-[#FF6500] hover:text-[#e65a00] transition"
-            >
-              DA
-            </Link>
+            > RGR</Link>
 
             {/* ================= DESKTOP LINKS ================= */}
             <div className="hidden md:flex items-center gap-10">

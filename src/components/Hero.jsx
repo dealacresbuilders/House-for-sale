@@ -115,7 +115,7 @@ setPopup({
 
           <p className="text-lg max-w-2xl text-gray-200 leading-relaxed">
             Searching for a house for sale in Faridabad that fits your lifestyle, budget, and future goals?<br/><br/>
-      Deal Acres helps you discover verified residential properties in the most sought-after locations of Faridabad.<br/><br/>
+      RGR Group helps you discover verified residential properties in the most sought-after locations of Faridabad.<br/><br/>
       From independent houses and builder floors to spacious family homes, we bring you trusted options.<br/><br/>
       With expert guidance, transparent pricing, and genuine listings, finding a house for sale in Faridabad has never been easier.
           </p>

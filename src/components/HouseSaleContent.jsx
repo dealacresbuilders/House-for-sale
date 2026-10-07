@@ -21,7 +21,7 @@ export default function HouseSaleContent() {
               Looking for a house for sale in Faridabad that matches your
               lifestyle, budget, and future goals?{" "}
               <span className="font-semibold text-[#EA580C]">
-                Deal Acres
+                RGR Group
               </span>{" "}
               brings you 1,200+ verified residential property listings across
               70+ prime localities of Faridabad — completely free of brokerage.

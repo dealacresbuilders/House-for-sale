@@ -181,7 +181,7 @@ export default function HouseZigZag() {
       ),
     },
     {
-      title: " Free Listing + Deal Acres Partnership",
+      title: " Free Listing + RGR Group Partnership",
       content: (
         <>
           <p>We offer free property listing for all users.</p>
@@ -194,7 +194,7 @@ export default function HouseZigZag() {
           </ul>
 
           <p className="mt-2">
-            We also have a corporate tie-up with Deal Acres. This helps us maintain quality listings and better reach.
+            We also have a corporate tie-up with RGR Group. This helps us maintain quality listings and better reach.
           </p>
 
           <p className="mt-2">
@@ -380,7 +380,7 @@ export default function HouseZigZag() {
           </ul>
 
           <p className="mt-2">
-            With our Deal Acres partnership, sellers get better reach and serious buyers.
+            With our RGR Group partnership, sellers get better reach and serious buyers.
           </p>
         </>
       ),

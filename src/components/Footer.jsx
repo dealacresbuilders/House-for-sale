@@ -64,31 +64,31 @@ export default function Footer() {
     switch (bhkType.toLowerCase()) {
       case "1 bhk":
         return "#"
-/* original: `https://www.dealacres.com/properties/1-bhk-house-for-sale-in-${createSlug(
+/* original: `https://www.RGR Group.com/properties/1-bhk-house-for-sale-in-${createSlug(
           location
         )}-faridabad` */;
 
       case "2 bhk":
         return "#"
-/* original: `https://www.dealacres.com/properties/2-bhk-house-for-sale-in-${createSlug(
+/* original: `https://www.RGR Group.com/properties/2-bhk-house-for-sale-in-${createSlug(
           location
         )}-faridabad` */;
 
       case "3 bhk":
         return "#"
-/* original: `https://www.dealacres.com/properties/3-bhk-house-for-sale-in-${createSlug(
+/* original: `https://www.RGR Group.com/properties/3-bhk-house-for-sale-in-${createSlug(
           location
         )}-faridabad` */;
 
       case "4 bhk":
         return "#"
-/* original: `https://www.dealacres.com/properties/4-bhk-house-for-sale-in-${createSlug(
+/* original: `https://www.RGR Group.com/properties/4-bhk-house-for-sale-in-${createSlug(
           location
         )}-faridabad` */;
 
       default:
         return "#"
-/* original: `https://www.dealacres.com/properties/house-for-sale-in-${createSlug(
+/* original: `https://www.RGR Group.com/properties/house-for-sale-in-${createSlug(
           location
         )}-faridabad` */;
     }
